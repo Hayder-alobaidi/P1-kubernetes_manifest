@@ -13,12 +13,12 @@ node {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
                         sh "git config user.email hydar426@gmail.com"
-                        sh "git config user.name RajSaha"
-                        sh "cat deployment.yaml"
-                        sh "sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG}+g' deployment.yaml"
-                        sh "cat deployment.yaml"
+                        sh "git config user.name Hayder-alobaidi"
+                        sh "cat mainfest/deployment.yaml"
+                        sh "sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG}+g' mainfest/deployment.yaml"
+                        sh "cat mainfest/deployment.yaml"
                         sh "git add ."
-                        sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
+                        sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
                         sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/P1-kubernetes_manifest.git HEAD:main"
       }
     }
