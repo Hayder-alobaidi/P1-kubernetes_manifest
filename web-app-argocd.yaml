@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-app  # Name of the ArgoCD application
+  namespace: argocd  # Namespace where the ArgoCD application resides
+spec:
+  destination:
+    namespace: web-app  # Target namespace where your application is deployed
+  project: default  # ArgoCD project to associate the application with
+
+  source:
+    repoURL: https://github.com/Hayder-alobaidi/P1-kubernetes_manifest.git  # URL of your Git repository
+    path:  # Path within the repository where your application manifests are located
+    targetRevision: HEAD  # Target revision (e.g., branch, tag) to track in the repository
+
+  syncPolicy:
+    automated:
+      prune: true  # Automatically delete resources not in Git repository
+      selfHeal: true  # Reconcile resources to desired state
+
+    syncOptions:
+      - CreateNamespace=true  # Automatically create the namespace if it doesn't exist
