@@ -11,7 +11,7 @@ spec:
 
   source:
     repoURL: https://github.com/Hayder-alobaidi/P1-kubernetes_manifest.git  # URL of your Git repository
-    path: manifests   # Path within the repository where your application manifests are located
+    path: mainfest   # Path within the repository where your application manifests are located
     targetRevision: HEAD   # Target revision (branch, tag, commit) to track in the repository
 
   syncPolicy:
