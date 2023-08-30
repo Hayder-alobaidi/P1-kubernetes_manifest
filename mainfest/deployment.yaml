@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-flask-app-deployment
+  name: web-app
+  namespace: web-app
+  labels:
+    app: web-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-flask-app
+      app: web-app
   template:
     metadata:
       labels:
-        app: my-flask-app
+        app: web-app
     spec:
       containers:
-        - name: my-flask-app
-          image: hayder89/web-app:v1
-          ports:
-            - containerPort: 5000
+      - name: web-app
+        image: hayder89/web-app:v1
+        ports:
+        - containerPort: 5000
