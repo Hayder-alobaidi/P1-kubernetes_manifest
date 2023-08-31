@@ -24,6 +24,6 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: hayder89/web-app:v1
+        image: hayder89/web-app:4
         ports:
         - containerPort: 5000
