@@ -23,7 +23,16 @@ In essence, this project automates the deployment of new applications, making ou
 
 **📚 [Setting Up Jenkins CI/CD As Part of GitOps Implementation](https://www.showwcase.com/show/36460/setting-up-jenkins-cicd-as-part-of-gitops-implementation):** Finally, I've created a blog post that covers the implementation of Jenkins CI/CD as an integral part of the GitOps framework. This blog post provides a clear, step-by-step guide for setting up Jenkins.
 
-These resources are organized sequentially to guide you through each phase of the project, ensuring a smooth and comprehensive understanding of the process.
+## Technologies and Tools Used in This Project:
 
+    AWS EKS
+    Terraform
+    Kubernetes
+    ArgoCD
+    Dockerhub
+    Python
+    Jenkins
+    GitHub
+    Linux
 
-Thank you for looking in this project , Please take a look on ohter reposictoray to see ohter projects that I did .
+Thank you for checking out this project. Please take a look at my other repositories to see more projects I have worked on.
