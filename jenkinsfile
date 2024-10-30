@@ -15,7 +15,7 @@ node {
                         sh "git config user.email hydar426@gmail.com"
                         sh "git config user.name Hayder-alobaidi"
                         sh "cat mainfest/deployment.yaml"
-                        sh "sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG}+g' mainfest/deployment.yaml"
+                        sh "sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG} +g' mainfest/deployment.yaml"
                         sh "cat mainfest/deployment.yaml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
