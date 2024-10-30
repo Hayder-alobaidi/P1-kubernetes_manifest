@@ -25,5 +25,6 @@ spec:
       containers:
       - name: web-app
         image: hayder89/web-app:v3
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
