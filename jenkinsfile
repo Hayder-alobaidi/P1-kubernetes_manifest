@@ -16,10 +16,9 @@ node {
                     sh 'cat mainfest/deployment.yaml'
                     sh 'git add .'
                     sh 'git commit -m "Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}"'
-                    // Correct handling of credentials in git push
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/P1-kubernetes_manifest.git HEAD:main'
-                    }
+                    sh '''
+                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/P1-kubernetes_manifest.git HEAD:main
+                    '''
                 }
             }
         }
