@@ -29,7 +29,7 @@ node {
                     sh """
                         git add .
                         git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'
-                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
+                        git push https://Hayder-alobaidi:${GIT_PASSWORD}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
                     """
                 }
             }
