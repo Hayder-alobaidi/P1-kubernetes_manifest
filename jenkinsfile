@@ -2,26 +2,37 @@ node {
     def app
 
     stage('Clone repository') {
-      
-
         checkout scm
     }
 
     stage('Update GIT') {
-            script {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                        sh "git config user.email hydar426@gmail.com"
-                        sh "git config user.name Hayder-alobaidi"
-                        sh "cat mainfest/deployment.yaml"
-                        sh "sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG}+g' mainfest/deployment.yaml"
-                        sh "cat mainfest/deployment.yaml"
-                        sh "git add ."
-                        sh "git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main"
-      }
+        script {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                withCredentials([usernamePassword(credentialsId: 'github', 
+                                                   usernameVariable: 'GIT_USERNAME', 
+                                                   passwordVariable: 'GIT_PASSWORD')]) {
+
+                    // Set user config for Git
+                    sh """
+                        git config user.email "hydar426@gmail.com"
+                        git config user.name "Hayder-alobaidi"
+                    """
+
+                    // Update deployment.yaml file
+                    sh """
+                        cat mainfest/deployment.yaml
+                        sed -i 's+hayder89/web-app.*+hayder89/web-app:${DOCKERTAG}+g' mainfest/deployment.yaml
+                        cat mainfest/deployment.yaml
+                    """
+                    
+                    // Git operations: Add changes, commit, and push securely using the environment variables
+                    sh """
+                        git add .
+                        git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'
+                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
+                    """
+                }
+            }
+        }
     }
-  }
-}
 }
