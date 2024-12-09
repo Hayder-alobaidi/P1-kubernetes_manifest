@@ -6,12 +6,10 @@ node {
     }
 
     stage('Update GIT') {
-        script {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                withCredentials([usernamePassword(credentialsId: 'github', 
-                                                   usernameVariable: 'GIT_USERNAME', 
-                                                   passwordVariable: 'GIT_PASSWORD')]) {
-
+            script {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        
                     // Set user config for Git
                     sh """
                         git config user.email "hydar426@gmail.com"
@@ -29,8 +27,8 @@ node {
                     sh """
                         git add .
                         git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'
-                        git push https://Hayder-alobaidi:${GIT_PASSWORD}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
-                    """
+                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/P1-kubernetes_manifest.git HEAD:main
+                        """
                 }
             }
         }
