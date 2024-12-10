@@ -1,5 +1,3 @@
-import java.net.URLEncoder
-
 node {
     def app
 
@@ -10,17 +8,11 @@ node {
     stage('Update GIT') {
         script {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                withCredentials([usernamePassword(credentialsId: 'github', 
-                                                   usernameVariable: 'GIT_USERNAME', 
-                                                   passwordVariable: 'GIT_PASSWORD')]) {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
 
                     // Set user config for Git
                     gitConfig("user.email", "hydar426@gmail.com")
                     gitConfig("user.name", "Hayder-alobaidi")
-
-                    // URL encode the username and password
-                    def encodedUsername = URLEncoder.encode(GIT_USERNAME, "UTF-8")
-                    def encodedPassword = URLEncoder.encode(GIT_PASSWORD, "UTF-8")
 
                     // Update deployment.yaml file
                     def dockerTag = "${DOCKERTAG}"
@@ -31,8 +23,8 @@ node {
                     // Git operations: Add changes, commit, and push securely using the environment variables
                     sh """
                         git add .
-                        git commit -m 'Done by Jenkins Job update mainfest: ${env.BUILD_NUMBER}'
-                        git push https://${encodedUsername}:${encodedPassword}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
+                        git commit -m 'Done by Jenkins Job update manifest: ${env.BUILD_NUMBER}'
+                        git push https://${GITHUB_TOKEN}@github.com/Hayder-alobaidi/P1-kubernetes_manifest.git HEAD:main
                     """
                 }
             }
